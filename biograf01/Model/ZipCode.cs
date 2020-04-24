@@ -11,6 +11,5 @@ namespace biograf01.Model
         public int Zipcode { get; set; }
         public string city { get; set; }
         public IList<UserZipCode> ZipCodes{get; set;}
-        //public class IdentityUser<TKey> where TKey : IEquatable<TKey>
     }
 }

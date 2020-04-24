@@ -17,7 +17,7 @@ namespace biograf01.Model
         public string lastname { get; set; }
         public string mailAddress { get; set; }
 
-        [ForeignKey("zipcodeId")] //parantes er klassen
+        //[ForeignKey("zipcodeId")] 
         public int ZipCodeId { get; set; }
         public ZipCode Zipcode { get; set; } //en user til en zipcod
         public IList<UserZipCode> User { get; set; } ///???
