@@ -10,8 +10,8 @@ using biograf01.Model;
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20200424084534_genrenumber")]
-    partial class genrenumber
+    [Migration("20200424130708_2")]
+    partial class _2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,8 +161,6 @@ namespace biograf01.Migrations
 
                     b.HasKey("usersId");
 
-                    b.HasIndex("ZipCodeId");
-
                     b.ToTable("User");
                 });
 
@@ -223,13 +221,13 @@ namespace biograf01.Migrations
             modelBuilder.Entity("biograf01.Model.TheaterSeats", b =>
                 {
                     b.HasOne("biograf01.Model.seats", "seat")
-                        .WithMany("seats1")
+                        .WithMany("Theatersseats")
                         .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("biograf01.Model.Theater", "theater")
-                        .WithMany("Theaters")
+                        .WithMany("Theatersseats")
                         .HasForeignKey("TheaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -238,23 +236,14 @@ namespace biograf01.Migrations
             modelBuilder.Entity("biograf01.Model.UserZipCode", b =>
                 {
                     b.HasOne("biograf01.Model.Users", "User")
-                        .WithMany("User")
+                        .WithMany("UserZipCode")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("biograf01.Model.ZipCode", "zipcode")
-                        .WithMany("ZipCodes")
+                        .WithMany("UserZipCode")
                         .HasForeignKey("zipcodeId");
-                });
-
-            modelBuilder.Entity("biograf01.Model.Users", b =>
-                {
-                    b.HasOne("biograf01.Model.ZipCode", "Zipcode")
-                        .WithMany()
-                        .HasForeignKey("ZipCodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

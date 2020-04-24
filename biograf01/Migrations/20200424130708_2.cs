@@ -2,7 +2,7 @@
 
 namespace biograf01.Migrations
 {
-    public partial class fk : Migration
+    public partial class _2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

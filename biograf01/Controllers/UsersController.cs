@@ -24,7 +24,7 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetUser()
         {
-            var UserList = await _context.User.Include(users => users).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
+            var UserList = await _context.User.Include(users => users.UserZipCode).ThenInclude(z=> z.zipcode).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
             return UserList;
         }
 

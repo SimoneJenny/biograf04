@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace biograf01.Migrations
 {
-    public partial class connections : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,8 @@ namespace biograf01.Migrations
                     Runtime = table.Column<string>(nullable: true),
                     Rating = table.Column<string>(nullable: true),
                     MainActors = table.Column<string>(nullable: true),
-                    Theater = table.Column<string>(nullable: true)
+                    Theater = table.Column<string>(nullable: true),
+                    Genrenumber = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,6 +65,24 @@ namespace biograf01.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Theater", x => x.TheaterId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    usersId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    username = table.Column<string>(nullable: true),
+                    password = table.Column<string>(nullable: true),
+                    firstname = table.Column<string>(nullable: true),
+                    lastname = table.Column<string>(nullable: true),
+                    mailAddress = table.Column<string>(nullable: true),
+                    ZipCodeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.usersId);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,27 +148,28 @@ namespace biograf01.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "userZipCode",
                 columns: table => new
                 {
-                    usersId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    username = table.Column<string>(nullable: true),
-                    password = table.Column<string>(nullable: true),
-                    firstname = table.Column<string>(nullable: true),
-                    lastname = table.Column<string>(nullable: true),
-                    mailAddress = table.Column<string>(nullable: true),
-                    ZipCodeId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    ZipCode = table.Column<int>(nullable: false),
+                    zipcodeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.usersId);
+                    table.PrimaryKey("PK_userZipCode", x => new { x.UserId, x.ZipCode });
                     table.ForeignKey(
-                        name: "FK_User_zipCode_ZipCodeId",
-                        column: x => x.ZipCodeId,
+                        name: "FK_userZipCode_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "usersId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_userZipCode_zipCode_zipcodeId",
+                        column: x => x.zipcodeId,
                         principalTable: "zipCode",
                         principalColumn: "zipcodeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -163,9 +183,9 @@ namespace biograf01.Migrations
                 column: "SeatId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_ZipCodeId",
-                table: "User",
-                column: "ZipCodeId");
+                name: "IX_userZipCode_zipcodeId",
+                table: "userZipCode",
+                column: "zipcodeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -177,7 +197,7 @@ namespace biograf01.Migrations
                 name: "theaterSeats");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "userZipCode");
 
             migrationBuilder.DropTable(
                 name: "Genres");
@@ -190,6 +210,9 @@ namespace biograf01.Migrations
 
             migrationBuilder.DropTable(
                 name: "Theater");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "zipCode");

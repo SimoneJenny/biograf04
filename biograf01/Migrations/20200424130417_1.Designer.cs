@@ -10,8 +10,8 @@ using biograf01.Model;
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20200423143617_connections")]
-    partial class connections
+    [Migration("20200424130417_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,9 @@ namespace biograf01.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Genrenumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("MainActors")
                         .HasColumnType("nvarchar(max)");
@@ -113,6 +116,24 @@ namespace biograf01.Migrations
                     b.ToTable("theaterSeats");
                 });
 
+            modelBuilder.Entity("biograf01.Model.UserZipCode", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("zipcodeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ZipCode");
+
+                    b.HasIndex("zipcodeId");
+
+                    b.ToTable("userZipCode");
+                });
+
             modelBuilder.Entity("biograf01.Model.Users", b =>
                 {
                     b.Property<int>("usersId")
@@ -139,8 +160,6 @@ namespace biograf01.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("usersId");
-
-                    b.HasIndex("ZipCodeId");
 
                     b.ToTable("User");
                 });
@@ -187,13 +206,13 @@ namespace biograf01.Migrations
             modelBuilder.Entity("biograf01.Model.MovieGenre", b =>
                 {
                     b.HasOne("biograf01.Model.Genre", "genre")
-                        .WithMany("Movie")
+                        .WithMany("moviegenre")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("biograf01.Model.Movie", "movie")
-                        .WithMany("Genre")
+                        .WithMany("Moviegenre")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -202,25 +221,29 @@ namespace biograf01.Migrations
             modelBuilder.Entity("biograf01.Model.TheaterSeats", b =>
                 {
                     b.HasOne("biograf01.Model.seats", "seat")
-                        .WithMany("seats1")
+                        .WithMany("Theatersseats")
                         .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("biograf01.Model.Theater", "theater")
-                        .WithMany("Theaters")
+                        .WithMany("Theatersseats")
                         .HasForeignKey("TheaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("biograf01.Model.Users", b =>
+            modelBuilder.Entity("biograf01.Model.UserZipCode", b =>
                 {
-                    b.HasOne("biograf01.Model.ZipCode", "Zipcode")
-                        .WithMany("User")
-                        .HasForeignKey("ZipCodeId")
+                    b.HasOne("biograf01.Model.Users", "User")
+                        .WithMany("UserZipCode")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("biograf01.Model.ZipCode", "zipcode")
+                        .WithMany("UserZipCode")
+                        .HasForeignKey("zipcodeId");
                 });
 #pragma warning restore 612, 618
         }

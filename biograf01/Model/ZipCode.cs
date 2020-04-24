@@ -10,6 +10,6 @@ namespace biograf01.Model
         public int zipcodeId { get; set; } //primary Key
         public int Zipcode { get; set; }
         public string city { get; set; }
-        public IList<UserZipCode> ZipCodes{get; set;}
+        public IList<UserZipCode> UserZipCode { get; set;}
     }
 }
