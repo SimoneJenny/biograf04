@@ -25,7 +25,7 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<Genre>>> GetGenres()
         {
-            var GenreList =  await _context.Genres.Include(GerneList => GerneList.Movie).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
+            var GenreList =  await _context.Genres.Include(GerneList => GerneList.moviegenre).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
             return GenreList;
         }
 

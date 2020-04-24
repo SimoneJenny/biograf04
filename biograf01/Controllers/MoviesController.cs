@@ -24,9 +24,12 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            var MovieList = await _context.Movies.Include(movieList => movieList.Genre).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
+            var MovieList = await _context.Movies.Include(movieList => movieList.Moviegenre).ThenInclude(g =>g.genre).ToListAsync();
             return MovieList;
         }
+        //var query1 = _context.Teacher
+        //       .Include(teacher => teacher.TeacherCourse)
+        //       .ThenInclude(tc => tc.course).ToList();
 
         // GET: api/Movies/5
         [HttpGet("{id}")]

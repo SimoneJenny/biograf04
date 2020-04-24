@@ -23,7 +23,7 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Theater>>> GetTheater()
         {
-            var TheaterList = await _context.Theater.Include(theaters => theaters.Theaters).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
+            var TheaterList = await _context.Theater.Include(theaters => theaters.Theatersseats).ThenInclude(s => s.seat).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
             return TheaterList;
         }
 

@@ -11,7 +11,7 @@ namespace biograf01.Model
         public int GenreId { get; set; }
         [Required] //genre må ikke være null!!!
         public string Genres { get; set; }
-        public IList<MovieGenre> Movie { get; set; } ///???
+        public IList<MovieGenre> moviegenre { get; set; } ///???
 
         //https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx
 

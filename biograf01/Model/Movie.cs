@@ -18,7 +18,8 @@ namespace biograf01.Model
         public string Rating { get; set; }
         public string MainActors { get; set; }
         public string Theater { get; set; }
-        public virtual IList<MovieGenre> Genre { get; set; }
+        public int Genrenumber { get; set; }
+        public virtual IList<MovieGenre> Moviegenre { get; set; }
 
     }
 }

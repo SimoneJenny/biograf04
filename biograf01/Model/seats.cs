@@ -12,6 +12,6 @@ namespace biograf01.Model
         public bool Avalible { get; set; }
         public int seat { get; set; }
         public int row { get; set; }
-        public IList<TheaterSeats> seats1 { get; set; }
+        public IList<TheaterSeats> Theatersseats { get; set; }
     }
 }
