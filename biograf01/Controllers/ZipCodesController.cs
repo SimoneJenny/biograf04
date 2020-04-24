@@ -24,7 +24,7 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ZipCode>>> GetzipCode()
         {
-            var ZipCodeList = await _context.zipCode.Include(zipcode => zipcode.Zipcode).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
+            var ZipCodeList = await _context.zipCode.Include(zipcode => zipcode.UserZipCode).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
             return ZipCodeList;
         }
 

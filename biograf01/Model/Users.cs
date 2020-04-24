@@ -17,7 +17,7 @@ namespace biograf01.Model
         public string mailAddress { get; set; }
         public int ZipCodeId { get; set; }
         //public ZipCode Zipcode { get; set; } //en user til en zipcod //FK
-        public IList<UserZipCode> UserZipCode { get; set; } ///???
+        public virtual IList<UserZipCode> UserZipCode { get; set; } 
     }
 }
 

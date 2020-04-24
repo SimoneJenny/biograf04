@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using biograf01.Model;
 
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200424161432_Userzipcodeworks")]
+    partial class Userzipcodeworks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,8 +47,8 @@ namespace biograf01.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Genrenumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Genrenumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("MainActors")
                         .HasColumnType("nvarchar(max)");
@@ -93,15 +95,6 @@ namespace biograf01.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("row")
-                        .HasColumnType("int");
-
-                    b.Property<int>("seat")
-                        .HasColumnType("int");
-
-                    b.Property<int>("theaternumbIds")
-                        .HasColumnType("int");
 
                     b.HasKey("TheaterId");
 
