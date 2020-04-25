@@ -23,13 +23,15 @@ namespace biograf01.Model
         public DbSet<MovieGenre> MovieGenre { get; set; } //1 - m  //  m - 1
         public DbSet<TheaterSeats> theaterSeats { get; set; } //1 - m  //  m - 1
         public DbSet<UserZipCode> userZipCode { get; set; }
-        
+        public DbSet<Show> Show { get; set; }
+
         protected override void OnModelCreating (ModelBuilder modelbuilder)
         {
             //dette er 1 - m  m-1 her er samlingstabellenn
             modelbuilder.Entity<MovieGenre>().HasKey(t => new { t.MovieId, t.GenreId });
             modelbuilder.Entity<TheaterSeats>().HasKey(t => new { t.TheaterId, t.SeatId });
             modelbuilder.Entity<UserZipCode>().HasKey(t => new { t.UserId, t.ZipCode });
+            modelbuilder.Entity<Show>().HasKey(t => new { t.movieId, t.theaterId });
         }
 
     }

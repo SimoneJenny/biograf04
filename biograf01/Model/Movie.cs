@@ -20,6 +20,7 @@ namespace biograf01.Model
         public string Theater { get; set; }
         public string Genrenumber { get; set; }
         public virtual IList<MovieGenre> Moviegenre { get; set; }
+        public virtual IList<Show> shows { get; set; }
 
     }
 }
