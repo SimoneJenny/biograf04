@@ -28,8 +28,6 @@ namespace biograf01.Controllers
             return MovieList;
             //var innerJoinMultipleTables = from m in _context.Movies join mg in _context.MovieGenre on m.MovieId equals mg.MovieId join g in _context.Genres on mg.GenreId equals g.GenreId select new  { m.Tittle, g.Genres };
             //return innerJoinMultipleTables;
-
-            
         }
 
         // GET: api/Movies/5
