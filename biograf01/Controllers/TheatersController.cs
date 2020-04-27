@@ -25,6 +25,17 @@ namespace biograf01.Controllers
         {
             var TheaterList = await _context.Theater.Include(theaters => theaters.Theatersseats).ThenInclude(s => s.seat).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
             return TheaterList;
+
+            //foreach (var movie in MovieList)
+            //{
+            //    foreach (var moviegenre in movie.Moviegenre)
+            //    {
+            //        moviegenre.genre.moviegenre = null;
+            //    }
+            //}
+            //return MovieList;
+
+
         }
 
         // GET: api/Theaters/5

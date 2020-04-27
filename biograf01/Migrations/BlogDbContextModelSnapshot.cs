@@ -95,6 +95,9 @@ namespace biograf01.Migrations
                     b.Property<int>("theaterId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("runtime")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("movieId", "theaterId");
 
                     b.HasIndex("theaterId");
@@ -113,9 +116,6 @@ namespace biograf01.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("seat")
-                        .HasColumnType("int");
-
-                    b.Property<int>("theaternumbIds")
                         .HasColumnType("int");
 
                     b.HasKey("TheaterId");

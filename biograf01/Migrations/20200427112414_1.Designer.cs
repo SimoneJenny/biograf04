@@ -10,8 +10,8 @@ using biograf01.Model;
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20200425145721_showlist1")]
-    partial class showlist1
+    [Migration("20200427112414_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,6 +97,9 @@ namespace biograf01.Migrations
                     b.Property<int>("theaterId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("runtime")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("movieId", "theaterId");
 
                     b.HasIndex("theaterId");
@@ -115,9 +118,6 @@ namespace biograf01.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("seat")
-                        .HasColumnType("int");
-
-                    b.Property<int>("theaternumbIds")
                         .HasColumnType("int");
 
                     b.HasKey("TheaterId");

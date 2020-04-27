@@ -24,13 +24,20 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            var MovieList = await _context.Movies.Include(movieList => movieList.Moviegenre).Include(show => show.shows).Include(g => g.Moviegenre).ToListAsync();
+            var MovieList = await _context.Movies.Include(show => show.shows).Include(movieList => movieList.Moviegenre).ThenInclude(a => a.genre).ToListAsync();
+
+            foreach (var movie in MovieList)
+            {
+                foreach (var moviegenre in movie.Moviegenre)
+                {
+                    moviegenre.genre.moviegenre = null;
+                }
+            }
             return MovieList;
             //var innerJoinMultipleTables = from m in _context.Movies join mg in _context.MovieGenre on m.MovieId equals mg.MovieId join g in _context.Genres on mg.GenreId equals g.GenreId select new  { m.Tittle, g.Genres };
             //return innerJoinMultipleTables; 
             //SQL LINQ
         }
-
         // GET: api/Movies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovie(int id)

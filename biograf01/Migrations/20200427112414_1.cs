@@ -33,7 +33,7 @@ namespace biograf01.Migrations
                     Rating = table.Column<string>(nullable: true),
                     MainActors = table.Column<string>(nullable: true),
                     Theater = table.Column<string>(nullable: true),
-                    Genrenumber = table.Column<int>(nullable: false)
+                    Genrenumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +60,9 @@ namespace biograf01.Migrations
                 columns: table => new
                 {
                     TheaterId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    seat = table.Column<int>(nullable: false),
+                    row = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,6 +126,31 @@ namespace biograf01.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Show",
+                columns: table => new
+                {
+                    movieId = table.Column<int>(nullable: false),
+                    theaterId = table.Column<int>(nullable: false),
+                    runtime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Show", x => new { x.movieId, x.theaterId });
+                    table.ForeignKey(
+                        name: "FK_Show_Movies_movieId",
+                        column: x => x.movieId,
+                        principalTable: "Movies",
+                        principalColumn: "MovieId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Show_Theater_theaterId",
+                        column: x => x.theaterId,
+                        principalTable: "Theater",
+                        principalColumn: "TheaterId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "theaterSeats",
                 columns: table => new
                 {
@@ -178,6 +205,11 @@ namespace biograf01.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Show_theaterId",
+                table: "Show",
+                column: "theaterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_theaterSeats_SeatId",
                 table: "theaterSeats",
                 column: "SeatId");
@@ -192,6 +224,9 @@ namespace biograf01.Migrations
         {
             migrationBuilder.DropTable(
                 name: "MovieGenre");
+
+            migrationBuilder.DropTable(
+                name: "Show");
 
             migrationBuilder.DropTable(
                 name: "theaterSeats");
