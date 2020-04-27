@@ -12,6 +12,5 @@ namespace biograf01.Model
         public int theaterId { get; set; }
         public Theater theater { get; set; }
         public DateTime runtime { get; set; }
-        //ny
     }
 }
