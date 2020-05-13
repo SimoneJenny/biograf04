@@ -27,12 +27,26 @@ namespace biograf01
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectiostring= @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CodeFirstDemo1;Integrated Security=SSPI;";
-            services.AddDbContext<BlogDbContext>((options) => options.UseSqlServer(connectiostring));
+            var connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CodeFirstDemo1;Integrated Security=SSPI";
+
+            services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connectionString));
 
             services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            //gør at den ikke looper zipcode => User listerne
+            // sikkerhedsproblem CORS Policy blablabla
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyAllowSpecificOrigins",
+                builder =>
+                {
+                    //builder.AllowAnyOrigin()
+                   builder.WithOrigins("http://localhost:4200"
+                                        )
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod(); // kun get eller put mm.
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
