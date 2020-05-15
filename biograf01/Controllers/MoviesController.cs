@@ -23,7 +23,7 @@ namespace biograf01.Controllers
         }
 
         // GET: api/Movies
-        [HttpGet]
+        [HttpGet]//testtet
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
             var MovieList = await _context.Movies.Include(show => show.shows).Include(movieList => movieList.Moviegenre).ThenInclude(a => a.genre).ToListAsync();
