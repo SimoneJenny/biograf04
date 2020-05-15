@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace biograf01.Controllers
 {
-    [EnableCors("MyAllowSpecificOrigins")]
+    //[EnableCors("MyAllowSpecificOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase

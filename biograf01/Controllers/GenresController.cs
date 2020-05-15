@@ -25,9 +25,12 @@ namespace biograf01.Controllers
         // GET: api/Genres
         //get all genre
         [HttpGet]
-        public async Task <ActionResult<IEnumerable<Genre>>> GetGenres()
+        public async Task <ActionResult<IEnumerable<Object>>> GetGenres() //Object er anonymt derfor obj
         {
-            var GenreList =  await _context.Genres.Include(GerneList => GerneList.moviegenre).ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
+            var GenreList =  await _context.Genres 
+                /*.Include(GerneList => GerneList.moviegenre)*/
+                .Select(g => new { GenreId = g.GenreId, Genres = g.Genres }) 
+                .ToListAsync(); //include = mange til mange tabel //theninclude = ligger her
             return GenreList;
         }
 

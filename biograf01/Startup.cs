@@ -39,9 +39,9 @@ namespace biograf01
                 options.AddPolicy("MyAllowSpecificOrigins",
                 builder =>
                 {
-                    //builder.AllowAnyOrigin()
-                   builder.WithOrigins("http://localhost:4200"
-                                        )
+                   builder.AllowAnyOrigin()
+                   //builder.WithOrigins("http://localhost:4200"
+                   //                     )
                                         .AllowAnyHeader()
                                         .AllowAnyMethod(); // kun get eller put mm.
                 });
@@ -60,6 +60,7 @@ namespace biograf01
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("MyAllowSpecificOrigins");
 
             app.UseAuthorization();
 
