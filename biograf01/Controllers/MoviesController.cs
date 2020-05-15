@@ -34,6 +34,7 @@ namespace biograf01.Controllers
                 {
                     moviegenre.genre.moviegenre = null;
                 }
+
             }
             return MovieList;
         }
