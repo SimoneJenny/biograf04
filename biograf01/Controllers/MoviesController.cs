@@ -28,6 +28,7 @@ namespace biograf01.Controllers
         {
             var MovieList = await _context.Movies.Include(show => show.shows).Include(movieList => movieList.Moviegenre).ThenInclude(a => a.genre).ToListAsync();
 
+
             foreach (var movie in MovieList)
             {
                 foreach (var moviegenre in movie.Moviegenre)
