@@ -22,7 +22,6 @@ namespace biograf01.Controllers
             _context = context;
         }
 
-
         // GET: api/Movies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
