@@ -37,7 +37,7 @@ namespace biograf01.Controllers
             }
             return MovieList;
         }
-        // GET: api/Movies/5
+        // GET: api/Movies/title='titlename'
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovie(int id)
         {
@@ -48,6 +48,13 @@ namespace biograf01.Controllers
                 return NotFound();
             }
             return exist;
+        }
+        [HttpGet("search/{title}")]
+        public Movie search(string title)
+        {
+            var movie = _context.Movies.Where(m => m.Tittle == title).FirstOrDefault();
+
+            return movie;
         }
 
         // PUT: api/Movies/5
