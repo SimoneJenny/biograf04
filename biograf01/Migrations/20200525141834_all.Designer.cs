@@ -10,8 +10,8 @@ using biograf01.Model;
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20200525125929_show")]
-    partial class show
+    [Migration("20200525141834_all")]
+    partial class all
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -255,7 +255,7 @@ namespace biograf01.Migrations
                         .WithMany("shows")
                         .HasForeignKey("MovieId");
 
-                    b.HasOne("biograf01.Model.Theater", "theater")
+                    b.HasOne("biograf01.Model.Theater", null)
                         .WithMany("shows")
                         .HasForeignKey("TheaterId");
                 });

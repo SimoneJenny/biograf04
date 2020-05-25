@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace biograf01.Migrations
 {
-    public partial class _1 : Migration
+    public partial class all : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -129,25 +129,27 @@ namespace biograf01.Migrations
                 name: "Show",
                 columns: table => new
                 {
-                    movieId = table.Column<int>(nullable: false),
-                    theaterId = table.Column<int>(nullable: false),
-                    runtime = table.Column<DateTime>(nullable: false)
+                    showId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MovieId = table.Column<int>(nullable: true),
+                    runtime = table.Column<DateTime>(nullable: false),
+                    TheaterId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Show", x => new { x.movieId, x.theaterId });
+                    table.PrimaryKey("PK_Show", x => x.showId);
                     table.ForeignKey(
-                        name: "FK_Show_Movies_movieId",
-                        column: x => x.movieId,
+                        name: "FK_Show_Movies_MovieId",
+                        column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "MovieId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Show_Theater_theaterId",
-                        column: x => x.theaterId,
+                        name: "FK_Show_Theater_TheaterId",
+                        column: x => x.TheaterId,
                         principalTable: "Theater",
                         principalColumn: "TheaterId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,9 +207,14 @@ namespace biograf01.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Show_theaterId",
+                name: "IX_Show_MovieId",
                 table: "Show",
-                column: "theaterId");
+                column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Show_TheaterId",
+                table: "Show",
+                column: "TheaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_theaterSeats_SeatId",
