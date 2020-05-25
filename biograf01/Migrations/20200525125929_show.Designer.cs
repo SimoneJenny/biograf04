@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using biograf01.Model;
 
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200525125929_show")]
+    partial class show
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +255,7 @@ namespace biograf01.Migrations
                         .WithMany("shows")
                         .HasForeignKey("MovieId");
 
-                    b.HasOne("biograf01.Model.Theater", null)
+                    b.HasOne("biograf01.Model.Theater", "theater")
                         .WithMany("shows")
                         .HasForeignKey("TheaterId");
                 });

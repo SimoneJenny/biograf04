@@ -26,10 +26,16 @@ namespace biograf01.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Show>>> GetShow()
         {
-            return await _context.Show.Include(s => s.movie)
-                .Include(a => a.theater)
-                .ThenInclude(m => m.Theatersseats).ToListAsync();
+        var list = await _context.Show.Include(sh => sh.movie).ToListAsync();  
+            //return list;
+            //1 til mange relation
+          
 
+            return list;
+
+            //return await _context.Show.Include(s => s.movie)
+            //    .Include(a => a.theater)
+            //    .ThenInclude(m => m.Theatersseats).ToListAsync();
 
             //var MovieList = await _context.Movies.Include(movieList => movieList.Moviegenre).ThenInclude(a => a.genre).Include(show => show.shows).ToListAsync();
             //return await _context.Show.Include(s => s.theater).ToListAsync(); //Include Movie.
@@ -55,7 +61,7 @@ namespace biograf01.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutShow(int id, Show show)
         {
-            if (id != show.movieId)
+            if (id != show.showId)
             {
                 return BadRequest();
             }
@@ -94,7 +100,7 @@ namespace biograf01.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ShowExists(show.movieId))
+                if (ShowExists(show.showId))
                 {
                     return Conflict();
                 }
@@ -104,7 +110,7 @@ namespace biograf01.Controllers
                 }
             }
 
-            return CreatedAtAction("GetShow", new { id = show.movieId }, show);
+            return CreatedAtAction("GetShow", new { id = show.showId }, show);
         }
 
         // DELETE: api/Shows/5
@@ -125,7 +131,7 @@ namespace biograf01.Controllers
 
         private bool ShowExists(int id)
         {
-            return _context.Show.Any(e => e.movieId == id);
+            return _context.Show.Any(e => e.showId == id);
         }
     }
 }

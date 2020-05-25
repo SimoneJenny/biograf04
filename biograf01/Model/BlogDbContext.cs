@@ -31,7 +31,7 @@ namespace biograf01.Model
             modelbuilder.Entity<MovieGenre>().HasKey(t => new { t.MovieId, t.GenreId });
             modelbuilder.Entity<TheaterSeats>().HasKey(t => new { t.TheaterId, t.SeatId });
             modelbuilder.Entity<UserZipCode>().HasKey(t => new { t.UserId, t.ZipCode });
-            modelbuilder.Entity<Show>().HasKey(t => new { t.movieId, t.theaterId });
+            modelbuilder.Entity<Show>().HasKey(t => new { t.showId});
         }
 
     }
