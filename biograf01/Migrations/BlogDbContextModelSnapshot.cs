@@ -45,9 +45,6 @@ namespace biograf01.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Genrenumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MainActors")
                         .HasColumnType("nvarchar(max)");
 

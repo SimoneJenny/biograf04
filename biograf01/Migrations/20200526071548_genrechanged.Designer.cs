@@ -10,8 +10,8 @@ using biograf01.Model;
 namespace biograf01.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20200525141834_all")]
-    partial class all
+    [Migration("20200526071548_genrechanged")]
+    partial class genrechanged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,9 +45,6 @@ namespace biograf01.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Genrenumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MainActors")

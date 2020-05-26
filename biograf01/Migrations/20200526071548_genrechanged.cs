@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace biograf01.Migrations
 {
-    public partial class all : Migration
+    public partial class genrechanged : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,8 +32,7 @@ namespace biograf01.Migrations
                     Runtime = table.Column<string>(nullable: true),
                     Rating = table.Column<string>(nullable: true),
                     MainActors = table.Column<string>(nullable: true),
-                    Theater = table.Column<string>(nullable: true),
-                    Genrenumber = table.Column<string>(nullable: true)
+                    Theater = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
