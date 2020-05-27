@@ -55,6 +55,19 @@ namespace biograf01.Controllers
             return show;
         }
 
+        [HttpGet("movie/{movieid}")]
+        //mindre end
+        public async Task<ActionResult<IEnumerable<Show>>> GetMovieShow(int movieid)
+        {
+            var show = await _context.Show.Where(s=>s.movie.MovieId==movieid).ToListAsync();
+
+            if (show == null)
+            {
+                return NotFound();
+            }
+            return show;
+        }
+
         // PUT: api/Shows/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
